@@ -1,0 +1,16 @@
+<p>user-info works!</p>
+<div id="modal-title">ログイン<button id="close" mat-button (click)="onClose()">✖</button></div>
+
+<div>登録ユーザー名：{{user.userName}}</div>
+<div>登録メールアドレス：{{user.email}}</div>
+
+パスワード変更はこちら
+<div>現在のパスワード</div>
+<input id="passwd" name="passwd" type="password" [(ngModel)]="oldPasswd" />
+<div>変更後のパスワード</div>
+<input id="passwd" name="passwd" type="password" [(ngModel)]="newPasswd" />
+
+
+<button (click)="onChengePasswd()">パスワードを変更</button>
+
+<!-- <button mat-button [mat-dialog-close]="data">パスワードを変更</button> -->

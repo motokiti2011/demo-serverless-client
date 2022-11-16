@@ -1,0 +1,19 @@
+<p>トップ</p>
+<div class="head-button">
+  <div>
+    <div *ngIf="isLogin else elseContent">
+      <input type="button" class="btn-border" on-click="onLogin()" value="ログイン">
+      <input type="button" class="btn-border" on-click="onSingup()" value="新規登録">
+    </div>
+    <ng-template #elseContent>
+      <input type="button" class="btn-border" on-click="onUserInfo()" value="{{loginUser}}">
+      <input type="button" class="btn-border" on-click="onLogout()" value="ログアウト">
+    </ng-template>
+  </div>
+</div>
+
+<div class="product-menu">
+  <app-product-menu 
+    [isLogin]="isLogin"
+  ></app-product-menu>
+</div>

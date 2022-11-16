@@ -1,0 +1,15 @@
+.disp-area{
+  height: 500px;
+  width: 100%;
+  display: flex;
+}
+
+
+.dispitem {
+  margin-bottom: 30px;
+}
+
+.margin{
+  display: flex;
+  margin-bottom: 10px;
+}

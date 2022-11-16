@@ -1,0 +1,13 @@
+<div id="modal-title">ログイン<button id="close" mat-button (click)="onClose()">✖</button></div>
+
+<div>ユーザー名</div>
+<input id="name" name="name" type="text" [(ngModel)]="data.userName" />
+
+<div>パスワード</div>
+<input id="passwd" name="passwd" type="password" [(ngModel)]="data.passwd" />
+<div>
+  <input type="button" class="btn" on-click="btnAction()" value="ログイン">
+</div>
+<div *ngIf="lading">
+  <mat-progress-spinner class="spinner" mode="indeterminate"></mat-progress-spinner>
+</div>

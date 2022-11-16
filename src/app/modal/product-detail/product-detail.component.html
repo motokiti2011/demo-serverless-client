@@ -1,0 +1,11 @@
+<p>商品詳細</p>
+<ul>
+  <li>商品名：{{productDetial.productName}}</li>
+  <li>商品数：{{productDetial.productQuantity}}</li>
+  <li>商品説明：{{productDetial.productExplanation}}</li>
+  <li>商品登録者：{{productDetial.productContributor}}</li>
+</ul>
+
+<img [src]="photoSrc" alt="写真URL"  width="150" height="150">
+
+<button mat-button [mat-dialog-close]="data">閉じる</button>

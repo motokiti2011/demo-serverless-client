@@ -1,0 +1,8 @@
+table {
+  border: 1;
+}
+
+.between {
+  display: flex;
+  justify-content: space-between;
+}
