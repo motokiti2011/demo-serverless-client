@@ -6,7 +6,10 @@
       <input type="button" class="btn-border" on-click="onSingup()" value="新規登録">
     </div>
     <ng-template #elseContent>
-      <input type="button" class="btn-border" on-click="onUserInfo()" value="{{loginUser}}">
+      <div>
+        <input type="button" class="btn-border" on-click="onUserInfo()" value="{{loginUser}}">
+        <div *ngIf="unRegistered">ユーザー情報登録を完了させてください</div>
+      </div>
       <input type="button" class="btn-border" on-click="onLogout()" value="ログアウト">
     </ng-template>
   </div>

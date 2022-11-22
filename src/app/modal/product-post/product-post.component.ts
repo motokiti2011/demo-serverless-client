@@ -6,6 +6,10 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { UploadComponent } from './upload/upload.component';
 import { ApiService } from 'src/app/service/api.service';
 import { LoginUserService } from 'src/app/service/login-user.service';
+import { CognitoService } from 'src/app/service/cognito.service';
+import { Observable, of } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
+import { user } from 'src/app/entity/user';
 
 export interface DialogData {
   userName: string;
@@ -25,6 +29,7 @@ export class ProductPostComponent implements OnInit {
     public data: DialogData,
     private api: ApiService,
     private authUser: LoginUserService,
+    private cognito: CognitoService,
   ) { }
 
   @ViewChild(UploadComponent) child!: UploadComponent;
@@ -59,12 +64,33 @@ export class ProductPostComponent implements OnInit {
         this.postInputData.productCategory = this.selectedCategory;
         this.postInputData.productQuantity = this.selectedQuantity;
       } else {
-        alert('ログインが必要です。');
-        this.closeModal();
+        this.getUser().subscribe(res => {
+          if (res) {
+            alert('ログインが必要です。');
+            this.loading = false;
+            this.closeModal();
+          }
+        });
       }
       this.loading = false;
     });
   }
+
+  getUser(): Observable<any> {
+    const authUser = this.cognito.initAuthenticated();
+    if (!authUser) {
+      return of(false)
+    }
+    return this.api.getUser(authUser).pipe(
+      map((res: user) => {
+        this.postInputData.productContributorId = res.userId;
+        this.postInputData.productContributor = res.userName;
+        of(true)
+      }),
+      catchError(() => of(true))
+    );
+  }
+
 
 
   /**

@@ -4,7 +4,6 @@ import { Location } from '@angular/common';
 import { CognitoService } from 'src/app/service/cognito.service';
 import { errorMsg } from 'src/app/entity/error';
 import { user } from 'src/app/entity/user';
-import { ApiService } from 'src/app/service/api.service';
 
 @Component({
   selector: 'app-singup',
@@ -25,25 +24,25 @@ export class SingupComponent implements OnInit {
     private cognito: CognitoService,
     private router: Router,
     private location: Location,
-    private api: ApiService,
   ) { }
 
   ngOnInit(): void {
 
   }
+
   /**
    * 新規ユーザー登録を行う
    * @param email 
    * @param password 
-   * @param username 
+   * @param userId 
    */
-  onSignup(email: string, password: string, username: string, userId: string) {
+  onSignup(email: string, password: string, userId: string) {
     this.cognito.signUp(userId, password, email)
       .then((result) => {
         this.confirmationDiv = true;
         this.dispMsg = '';
         this.userInfo.userId = userId;
-        this.userInfo.userName = username;
+        this.userInfo.userName = '';
         this.userInfo.mailAdress = email;
 
         console.log(result);
@@ -66,15 +65,12 @@ export class SingupComponent implements OnInit {
       .then((result) => {
         this.dispMsg = '';
         console.log(result);
-        // ユーザーTBLに情報を登録する。
-        // DynamoDBにも登録画面遷移などで（this.userInfo）が失われる可能性も本チャンで使うときは考慮すべき？？？
-        this.api.postUser(this.userInfo).subscribe(data => {
-          console.log(data);
+        if (result) {
           alert('登録完了！！')
-        })
-      }).catch((err) => {
-        console.log(err);
-        this.dispMsg = errorMsg[2].value;
+          this.router.navigate(["/"])
+        } else {
+          alert('失敗')
+        }
       });
   }
 

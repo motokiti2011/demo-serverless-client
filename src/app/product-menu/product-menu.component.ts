@@ -61,8 +61,6 @@ export class ProductMenuComponent implements OnInit {
 
   ngOnInit(): void {
     this.getProductList();
-    this.photoSrc='https://sample-cognito-test1.s3.amazonaws.com/%E3%83%86%E3%82%B9%E3%83%88%E7%94%A8%20-%20%E3%82%B3%E3%83%94%E3%83%BC.png'
-    console.log(this.isLogin); 
   }
 
   /**
@@ -73,22 +71,16 @@ export class ProductMenuComponent implements OnInit {
     // 商品一覧を取得
     this.apiService.getProductList(this.selected).subscribe(result => {
       if (result) {
-        // データ取得できた場合、表示内容をセットし画像情報をS3から取得
-        this.dispList = result.Items;
-        this.listDiv = true;
-        this.s3.getFileList().then((data) => {
-          if (data) {
-            this.remoteFiles = data.Contents;
-            this.loading = false;
-          }
-        }).catch((err) => {
-          console.log(err);
+        // データ取得できた場合、表示内容をセット
+        if (result.Items.length > 0) {
+          this.dispList = result.Items;
+          this.listDiv = true;
           this.loading = false;
-        });
-      } else {
-        this.listDiv = false;
-        this.loading = false;
+          return;
+        }
       }
+      this.listDiv = false;
+      this.loading = false;
     });
   }
 

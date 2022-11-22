@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpResponse, } from '@angular/common/http';
 import { Observable, of, tap } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
-
+import { environment } from 'src/environments/environment';
 import { productList } from '../product-menu/product-menu.component';
 import { product } from '../entity/product';
 import { user } from '../entity/user';
@@ -16,7 +16,7 @@ export class ApiService {
     private http: HttpClient,
   ) { }
 
-  private apiEndPoint: string = 'https://4f97sxo1hj.execute-api.us-east-1.amazonaws.com/dev';
+  private apiEndPoint: string = environment.apiEmdPoint;
 
   /**
    * 商品リストを取得する
@@ -51,7 +51,7 @@ export class ApiService {
         "productId": id
       }
     };
-    return this.http.post<product>(this.apiEndPoint + '/product-item/postitem', body).pipe(
+    return this.http.post<product>(this.apiEndPoint + '/productitem/postitem', body).pipe(
       // 取得できた場合ユーザー情報を返却
       map((res: product) => res),
       // エラー時HTTPステータスコードを戻す
@@ -79,7 +79,7 @@ export class ApiService {
         "productQuantity": product.productQuantity
       }
     }
-    return this.http.post<product>(this.apiEndPoint + '/product-item/postitem', body).pipe(
+    return this.http.post<product>(this.apiEndPoint + '/productitem/postitem', body).pipe(
       // 取得できた場合ユーザー情報を返却
       map((res: product) => res),
       // エラー時HTTPステータスコードを戻す

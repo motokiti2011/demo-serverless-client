@@ -6,6 +6,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { MaterialModule } from './material/material/material.module';
 import { HttpClientModule} from '@angular/common/http';
 import { OverlayModule } from '@angular/cdk/overlay';
+import { NgbModule} from '@ng-bootstrap/ng-bootstrap'
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -49,6 +50,7 @@ const ROUTE_TABLE: Routes = [
     MaterialModule,
     OverlayModule,
     HttpClientModule,
+    NgbModule,
     RouterModule.forRoot(ROUTE_TABLE),
   ],
   providers: [

@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { LoginComponent } from '../modal/login/login.component';
@@ -6,6 +6,7 @@ import { UserInfoComponent } from '../modal/user-info/user-info.component';
 import { CognitoService } from 'src/app/service/cognito.service';
 import { ApiService } from '../service/api.service';
 import { LoginUserService } from '../service/login-user.service';
+import { ProductMenuComponent } from '../product-menu/product-menu.component';
 
 @Component({
   selector: 'app-top-menu',
@@ -16,9 +17,15 @@ export class TopMenuComponent implements OnInit {
 
 
   /** ログインユーザー名 */
-  loginUser = '仮ユーザ';
+  loginUser = 'ゲストユーザー';
   /** ログイン状態区分 */
   isLogin = true;
+  /** ユーザー未登録区分 */
+  unRegistered = false;
+
+  /** 子コンポーネントを読み込む */
+  @ViewChild(ProductMenuComponent) child!: ProductMenuComponent;
+
 
   loginData = {
     userName: '',
@@ -37,7 +44,7 @@ export class TopMenuComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.authenticated();
+    this.authenticated();;
   }
 
   /**
@@ -45,7 +52,7 @@ export class TopMenuComponent implements OnInit {
    */
   private authenticated() {
     const authUser = this.cognito.initAuthenticated();
-    
+
     if (authUser !== null) {
       // ログイン状態の場合
       this.isLogin = false;
@@ -59,14 +66,22 @@ export class TopMenuComponent implements OnInit {
     }
   }
 
+  /**
+   * 認証情報からユーザー情報を取得
+   * @param authUser
+   */
   private setAuthUser(authUser: string) {
     // 認証済の場合表示するユーザー情報を取得
     this.apiService.getUser(authUser).subscribe(data => {
       console.log(data);
-      if (data) {
+      if (data.Items[0]) {
         this.loginUser = data.Items[0].userName;
+        this.unRegistered = false;
         // Subjectにてログイン状態を保持する。
         this.auth.login(data.Items[0]);
+      } else {
+        this.loginUser = 'ユーザー情報未設定'
+        this.unRegistered = true;
       }
     });
   }
@@ -92,6 +107,8 @@ export class TopMenuComponent implements OnInit {
       } else {
         this.isLogin = true;
       }
+      this.child.ngOnInit
+      this.authenticated();
     });
   }
 
@@ -102,6 +119,7 @@ export class TopMenuComponent implements OnInit {
     this.cognito.logout();
     this.auth.logout();
     this.isLogin = true;
+    this.ngOnInit;
   }
 
   /**
@@ -113,7 +131,8 @@ export class TopMenuComponent implements OnInit {
       height: '450px',
     });
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
+      this.child.ngOnInit;
+      this.authenticated();
     });
   }
 
