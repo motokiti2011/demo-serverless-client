@@ -1,22 +1,37 @@
 <p>トップ</p>
+
 <div class="head-button">
-  <div>
-    <div *ngIf="isLogin else elseContent">
-      <input type="button" class="btn-border" on-click="onLogin()" value="ログイン">
-      <input type="button" class="btn-border" on-click="onSingup()" value="新規登録">
-    </div>
-    <ng-template #elseContent>
-      <div>
-        <input type="button" class="btn-border" on-click="onUserInfo()" value="{{loginUser}}">
-        <div *ngIf="unRegistered">ユーザー情報登録を完了させてください</div>
+  <div class="container">
+    <div class="row">
+      <div *ngIf="isLogin else elseContent">
+        <div class="col">
+          <input type="button" class="btn-border" on-click="onLogin()" value="ログイン">
+        </div>
+        <div class="col">
+          <input type="button" class="btn-border" on-click="onSingup()" value="新規登録">
+        </div>
       </div>
-      <input type="button" class="btn-border" on-click="onLogout()" value="ログアウト">
-    </ng-template>
+
+      <ng-template #elseContent>
+
+        <div class="col">
+          <input type="button" class="btn-border" on-click="onUserInfo()" value="{{loginUser}}">
+          <div *ngIf="unRegistered">ユーザー情報登録を完了させてください</div>
+        </div>
+
+        <div class="col">
+          <input type="button" class="btn-border" on-click="onLogout()" value="ログアウト">
+        </div>
+
+      </ng-template>
+
+    </div>
   </div>
 </div>
 
+
 <div class="product-menu">
-  <app-product-menu 
+  <app-product-menu
     [isLogin]="isLogin"
   ></app-product-menu>
 </div>

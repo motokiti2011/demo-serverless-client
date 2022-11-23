@@ -3,30 +3,40 @@
   <mat-progress-spinner class="spinner" mode="indeterminate"></mat-progress-spinner>
 </div>
 <ng-template #elseContent>
-  <div class="margin">
-    <p>商品カテゴリー</p>
-    <select class="displayList" [(ngModel)]="selected" (change)="onDisplayList()">
-      <option *ngFor="let item of selectCategory" [value]="item.value" [disabled]="item.disabled"
-        [selected]="item.value === selected">{{item.label}}</option>
-    </select>
-    <div *ngIf="!isLogin">
-      <input type="button" class="btn-border" on-click="onProductPost()" value="商品を登録">
+  <div class="container">
+    <div class="row">
+      <div class="margin">
+        <p>商品カテゴリー</p>
+        <select class="displayList" [(ngModel)]="selected" (change)="onDisplayList()">
+          <option *ngFor="let item of selectCategory" [value]="item.value" [disabled]="item.disabled"
+            [selected]="item.value === selected">{{item.label}}</option>
+        </select>
+        <div *ngIf="!isLogin">
+          <input type="button" class="btn-border" on-click="onProductPost()" value="商品を登録">
+        </div>
+      </div>
     </div>
   </div>
 
-  <div class="disp-area" *ngIf="listDiv; else elseContent">
-    <div class="dispitem" *ngFor="let item of dispList">
-      <div><label>商品名：</label>{{item.productName}}</div>
-      <div><label>商品登録者：</label>{{item.productContributor}}</div>
-      <div><label>商品画像：</label>item.productImageUrl</div>
-      <!-- <img [src]="photoSrc" alt="写真URL"> -->
-      <input type="button" on-click="onProductDetail(item.productId)" value="詳細はこちら">
+
+  <div class="container">
+    <div class="row">
+      <div class="disp-area" *ngIf="listDiv; else elseContent">
+        <div class="dispitem" *ngFor="let item of dispList">
+          <div><label>商品名：</label>{{item.productName}}</div>
+          <div><label>商品登録者：</label>{{item.productContributor}}</div>
+          <div><label>商品画像：</label>item.productImageUrl</div>
+          <!-- <img [src]="photoSrc" alt="写真URL"> -->
+          <input type="button" on-click="onProductDetail(item.productId)" value="詳細はこちら">
+        </div>
+      </div>
     </div>
   </div>
+
   <ng-template #elseContent>
     <div class="margin">表示できる商品情報はありません。</div>
-  </ng-template> 
-  
+  </ng-template>
+
 
 
 </ng-template>

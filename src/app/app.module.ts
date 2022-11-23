@@ -11,7 +11,7 @@ import { NgbModule} from '@ng-bootstrap/ng-bootstrap'
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TopMenuComponent } from './top-menu/top-menu.component';
-import { SingupComponent } from './top-menu/singup/singup.component';
+import { SingupComponent } from './singup/singup.component';
 import { LoginComponent } from './modal/login/login.component';
 import { ProductPostComponent } from './modal/product-post/product-post.component';
 import { ProductDetailComponent } from './modal/product-detail/product-detail.component';

@@ -1,0 +1,57 @@
+
+  <div class="container">
+    <div class="row">
+      <div class="col-1"></div>
+      <div class="col-3">{{title}}
+      <div *ngIf="!confirmationDiv">
+        <p>登録する情報を入力してください</p>
+      </div>
+      <input type="button" class="btn-border" on-click="goBack()" value="トップに戻る">
+    </div>
+  </div>
+
+  <form>
+  <div class="form-row">
+    <div class="col-1"></div>
+    <div class="col-4">
+      <label>Eメール</label>
+      <input type="email" class="form-control" placeholder="email" id="email" name="email" #email>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="col-1"></div>
+    <div class="col-4">
+      <label>ユーザーID</label>
+      <input type="text" class="form-control" placeholder="ユーザーID" id="userid" name="userid"#userid>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="col-1"></div>
+    <div class="col-4">
+      <label>パスワード: </label>
+      <input type="password" class="form-control" placeholder="password" id="password" name="password" #password>
+    </div>
+  </div>
+</form>
+
+<div class="container">
+  <div class="row">
+    <div class="col-1"></div>
+    <div class="col-3">
+      <p class="error">{{dispMsg}}</p>
+      <button type="submit" (click)="onSignup(email.value, password.value,userid.value)">送信</button>
+      <div class="confirmation" *ngIf="confirmationDiv">
+        <p>登録した「ユーザー名」と登録メールアドレスに届いた「Confirmation Code(登録コード)」を入力してください</p>
+        <div class="confirmation-input">ユーザー名: <input type="name" placeholder="name" id="name" name="name" #name></div>
+        <div class="confirmation-input">Confirmation Code: <input type="text" placeholder="confirmationCode" id="confirmationCode" name="confirmationCode" #confirmationCode></div>
+        <p class="error">{{dispMsg}}</p>
+        <button type="submit" (click)="onConfirmation(name.value, confirmationCode.value)">送信</button> <!-- </form> -->
+      </div>
+  </div>
+</div>
+
+
+
+

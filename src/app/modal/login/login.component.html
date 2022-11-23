@@ -1,13 +1,19 @@
 <div id="modal-title">ログイン<button id="close" mat-button (click)="onClose()">✖</button></div>
 
-<div>ユーザー名</div>
-<input id="name" name="name" type="text" [(ngModel)]="data.userName" />
-
-<div>パスワード</div>
-<input id="passwd" name="passwd" type="password" [(ngModel)]="data.passwd" />
-<div>
-  <input type="button" class="btn" on-click="btnAction()" value="ログイン">
+<div class="form-group">
+  <label>ユーザー名</label>
+  <input type="text" class="form-control" id="name" name="name" [(ngModel)]="data.userName" />
 </div>
+
+<div class="form-group">
+  <label>パスワード</label>
+  <input type="password" class="form-control" id="passwd" name="passwd" [(ngModel)]="data.passwd" />
+</div>
+
+<div>
+  <button type="submit" class="btn btn-primary" on-click="btnAction()">ログイン</button>
+</div>
+
 <div *ngIf="lading">
   <mat-progress-spinner class="spinner" mode="indeterminate"></mat-progress-spinner>
 </div>
