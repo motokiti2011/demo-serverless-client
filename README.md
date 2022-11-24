@@ -1,16 +1,33 @@
 # ローカル起動方法
-ここではVSCodeを使用してのローカル起動を実施します。									
+Angularを使用してクライアントアプリを作成したものを
+VSCodeを使用してのローカル起動を実施します。  
+【前提】  
+node.js が入っていてnpmコマンドが使える環境であること
 1. Gitからプロジェクトディレクトリを取得し、VSCodeのワークスペースにて開く。									
 2. プロジェクトディレクトリで統合ターミナルを開き以下コマンドを実施してライブラリを追加する  
-	・ライブラリインストール
-　　　npm install
-	・AWSとの連携に使用するライブラリ  
-　　　npm i --save amazon-cognito-identity-js  
-　　　npm i --save aws-sdk  
-	・Angular Materialのライブラリ  
-　　　ng add @angular/material  							
-3. ローカル起動									
-	ng serve --open								
+	・ライブラリインストール  
+	```
+	npm install
+	```
+3. ローカル起動  	
+	```
+	ng serve --open
+	```
+
+	失敗する場合  
+	そもそものコマンドを受け付けない場合
+	```
+	Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process
+	```
+	ng serve --openでこける場合
+	```
+	ng serve
+	openオプションを抜いて、サーバー起動後手動で画面を開く
+	```
+4. 3の前に実施しても良い  
+demo-serverless-client\src\environments\environment.ts  
+このファイルに対してAWS-CloudFormationで作成したルートスタックの出力情報とAPIGateWayのデプロイ後のURL情報を設定する。
+
 
 
 # 画面説明
@@ -55,16 +72,21 @@
 　　　　└　ユーザー編集<br>
 　　　　└　投稿商品編集<br>
 
+
 # その他設定
-1.demo-serverless-client\src\polyfills.ts
-以下を追加
+AWS-SDKをAngularで使用する設定  
+1. demo-serverless-client\src\polyfills.ts  
+以下を追加  
+```
 // "global is not defined"の対応
 (window as any).global = window;
+```
 
-2.demo-serverless-client\tsconfig.app.json
-以下を設定
+2. demo-serverless-client\tsconfig.app.json  
+以下を設定  
+```
 "types": ["node"]
-
+```
 
 # demo-serverless-client
 
