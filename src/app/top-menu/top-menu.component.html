@@ -1,37 +1,44 @@
-<p>トップ</p>
 
 <div class="head-button">
   <div class="container">
-    <div class="row">
-      <div *ngIf="isLogin else elseContent">
-        <div class="col">
+    <p>トップメニュー</p>
+    <div *ngIf="isLogin else elseContent">
+
+      <div class="row">
+        <div class="col-2">
           <input type="button" class="btn-border" on-click="onLogin()" value="ログイン">
         </div>
-        <div class="col">
+
+        <div class="col-1">
           <input type="button" class="btn-border" on-click="onSingup()" value="新規登録">
         </div>
       </div>
+    </div>
 
       <ng-template #elseContent>
+        <div class="row">
+          <div class="col-md-auto">
+            <input type="button" class="btn-border" on-click="onUserInfo()" value="{{loginUser}}">
+            <div *ngIf="unRegistered">ユーザー情報登録を完了させてください</div>
+          </div>
 
-        <div class="col">
-          <input type="button" class="btn-border" on-click="onUserInfo()" value="{{loginUser}}">
-          <div *ngIf="unRegistered">ユーザー情報登録を完了させてください</div>
+          <div class="col-md-auto">
+            <input type="button" class="btn-border" on-click="onLogout()" value="ログアウト">
+          </div>
         </div>
-
-        <div class="col">
-          <input type="button" class="btn-border" on-click="onLogout()" value="ログアウト">
-        </div>
-
       </ng-template>
-
-    </div>
   </div>
 </div>
 
 
-<div class="product-menu">
-  <app-product-menu
-    [isLogin]="isLogin"
-  ></app-product-menu>
+<div class="container">
+  <div class="row">
+    <div class="col">
+    <!-- <div class="product-menu"> -->
+      <app-product-menu
+        [isLogin]="isLogin"
+      ></app-product-menu>
+    </div>
+  <!-- </div> -->
+  </div>
 </div>

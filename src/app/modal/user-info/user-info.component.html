@@ -1,29 +1,70 @@
-
-<div id="modal-title">ユーザー管理画面<button id="close" mat-button (click)="onClose()">✖</button></div>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">ユーザー管理画面</div>
+    <div class="col-2">
+      <button id="close" mat-button (click)="onClose()">✖</button>
+    </div>
+  </div>
 
 <div *ngIf="anResister">
-  <h5>ユーザー名と登録したメールアドレスの入力をしてください</h5>
+  <div class="row">
+    <h5>ユーザー名と登録したメールアドレスの入力をしてください</h5>
+  </div>
 </div>
 
 <div *ngIf="anResister else elseContent">
-  <div>ユーザー名</div>
-  <input id="name" name="name" type="text" [(ngModel)]="inputData.userName" />
-  <div>登録メールアドレス</div>
-  <input id="email" name="email" type="email" [(ngModel)]="inputData.email" />
-  <input type="button" class="btn" on-click="onResister()" value="登録">
+  <div class="row">
+    <div>ユーザー名</div>
+    <input id="name" name="name" type="text" [(ngModel)]="inputData.userName" />
+  </div>
+
+  <div class="row">
+    <div>登録メールアドレス</div>
+    <input id="email" name="email" type="email" [(ngModel)]="inputData.email" />
+  </div>
+  <div class="row">
+    <input type="button" class="btn" on-click="onResister()" value="登録">
+  </div>
 </div>
 <ng-template #elseContent>
-  <div>
+
+  <div class="row">
     <div>登録ユーザー名：{{user.userName}}</div>
+  </div>
+
+  <div class="row">
     <div>登録メールアドレス：{{user.mailAdress}}</div>
   </div>
-    パスワード変更はこちら
-  <div>現在のパスワード</div>
-  <input id="passwd" name="passwd" type="password" [(ngModel)]="oldPasswd" />
-  <div>変更後のパスワード</div>
-  <input id="passwd" name="passwd" type="password" [(ngModel)]="newPasswd" />
-  <button (click)="onChengePasswd()">パスワードを変更</button>
+
+  <div class="row">
+      パスワード変更はこちら
+  </div>
+
+  <form>
+    <div class="form-row">
+    <div class="col">
+      <label>現在のパスワード</label>
+    </div>
+      <div class="col-8">
+        <input id="passwd" class="form-control" name="passwd" type="password" [(ngModel)]="oldPasswd" />
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="col">
+        <label>変更後のパスワード</label>
+      </div>
+      <div class="col-8">
+        <input id="passwd" class="form-control" name="passwd" type="password" [(ngModel)]="newPasswd" />
+      </div>
+    </div>
+  </form>
+
+
+  <div class="row">
+    <button (click)="onChengePasswd()">パスワードを変更</button>
+  </div>
 </ng-template>
 
-
+</div>
 <!-- <button mat-button [mat-dialog-close]="data">パスワードを変更</button> -->

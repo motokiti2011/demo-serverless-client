@@ -127,7 +127,7 @@ export class TopMenuComponent implements OnInit {
    */
   onUserInfo() {
     const dialogRef = this.userInfo.open(UserInfoComponent, {
-      width: '400px',
+      width: '500px',
       height: '450px',
     });
     dialogRef.afterClosed().subscribe(result => {

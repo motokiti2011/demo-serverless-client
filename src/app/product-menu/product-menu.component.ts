@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ApiService } from '../service/api.service';
 import { MatDialog } from '@angular/material/dialog';
-// import { ProductDetailComponent } from '../modal/user-info/product-detail/product-detail.component';
+
 import { ProductDetailComponent } from '../modal/product-detail/product-detail.component';
 import { ProductPostComponent } from '../modal/product-post/product-post.component';
 import { product } from '../entity/product';
@@ -46,6 +46,10 @@ export class ProductMenuComponent implements OnInit {
   /** 表示順セレクトボタン */
   selected = 'food';
 
+  begin = 0;
+
+  length = 3;
+
   // 認証状態フラグ
   @Input() isLogin: boolean = true;
 
@@ -74,6 +78,13 @@ export class ProductMenuComponent implements OnInit {
         // データ取得できた場合、表示内容をセット
         if (result.Items.length > 0) {
           this.dispList = result.Items;
+          this.dispList.forEach(item => {
+            if(item.productImageUrl) {
+              item.productImageUrl = 'あり'
+            } else {
+              item.productImageUrl = 'なし'
+            }
+          });
           this.listDiv = true;
           this.loading = false;
           return;
@@ -87,7 +98,7 @@ export class ProductMenuComponent implements OnInit {
 
   /**
    * 選択した商品の詳細表示画面に遷移する
-   * @param productId 
+   * @param productId
    */
   onProductDetail(productId: String) {
     this.apiService.getProduct(productId).subscribe(prductData => {
@@ -120,6 +131,9 @@ export class ProductMenuComponent implements OnInit {
     });
   }
 
+  /**
+   * セレクトボックス操作イベント
+   */
   onDisplayList() {
     console.log(this.selected);
     this.getProductList();
