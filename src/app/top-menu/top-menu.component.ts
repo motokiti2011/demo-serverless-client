@@ -107,7 +107,7 @@ export class TopMenuComponent implements OnInit {
       } else {
         this.isLogin = true;
       }
-      this.child.ngOnInit
+      this.child.getProductList();
       this.authenticated();
     });
   }
@@ -131,8 +131,9 @@ export class TopMenuComponent implements OnInit {
       height: '450px',
     });
     dialogRef.afterClosed().subscribe(result => {
-      this.child.ngOnInit;
-      this.authenticated();
+        console.log(result);
+        this.child.getProductList;
+        this.authenticated();
     });
   }
 

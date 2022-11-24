@@ -85,6 +85,7 @@ export class UserInfoComponent implements OnInit {
       if (data) {
         alert('登録完了');
         this.anResister = false;
+        this.closeModal();
       }
     })
   }
@@ -100,7 +101,7 @@ export class UserInfoComponent implements OnInit {
    * モーダルクローズ
    */
   closeModal() {
-    this._dialogRef.close();
+    this._dialogRef.close(true);
   }
 
   /**
@@ -111,12 +112,10 @@ export class UserInfoComponent implements OnInit {
       .then((result: any) => {
         alert('パスワードを変更しました。');
         console.log(result);
+        this.closeModal();
       }).catch((err: any) => {
         alert('パスワード変更に失敗しました。');
         console.log(err);
-        // if (err == errorMsg[1].message) {
-        //   this.dispMsg = errorMsg[1].value;
-        // }
       });
   }
 

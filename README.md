@@ -1,11 +1,13 @@
 # ローカル起動方法
 ここではVSCodeを使用してのローカル起動を実施します。									
 1. Gitからプロジェクトディレクトリを取得し、VSCodeのワークスペースにて開く。									
-2. プロジェクトディレクトリで統合ターミナルを開き以下コマンドを実施してライブラリを追加する。	<br>
-	・AWSとの連携に使用するライブラリ<br>
-　　　npm i --save amazon-cognito-identity-js<br>
-　　　npm i --save aws-sdk<br>
-	・Angular Materialのライブラリ<br>
+2. プロジェクトディレクトリで統合ターミナルを開き以下コマンドを実施してライブラリを追加する  
+	・ライブラリインストール
+　　　npm install
+	・AWSとの連携に使用するライブラリ  
+　　　npm i --save amazon-cognito-identity-js  
+　　　npm i --save aws-sdk  
+	・Angular Materialのライブラリ  
 　　　ng add @angular/material  							
 3. ローカル起動									
 	ng serve --open								
@@ -54,17 +56,17 @@
 　　　　└　投稿商品編集<br>
 
 # その他設定
-1.serverless-sample\src\polyfills.ts
+1.demo-serverless-client\src\polyfills.ts
 以下を追加
 // "global is not defined"の対応
 (window as any).global = window;
 
-2.serverless-sample\tsconfig.app.json
+2.demo-serverless-client\tsconfig.app.json
 以下を設定
 "types": ["node"]
 
 
-# ServerlessSample
+# demo-serverless-client
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.0.4.
 

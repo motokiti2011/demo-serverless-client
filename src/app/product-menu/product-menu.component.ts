@@ -70,7 +70,7 @@ export class ProductMenuComponent implements OnInit {
   /**
    * 商品一覧情報を取得する
    */
-  private getProductList() {
+  getProductList() {
     this.loading = true;
     // 商品一覧を取得
     this.apiService.getProductList(this.selected).subscribe(result => {
@@ -109,6 +109,7 @@ export class ProductMenuComponent implements OnInit {
         data: prductData.Items[0]
       });
       dialogRef.afterClosed().subscribe(result => {
+        // 特に何もしない
         console.log(result);
       });
     });
@@ -127,7 +128,10 @@ export class ProductMenuComponent implements OnInit {
       data: postData
     });
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
+      if(result) {
+        // データ登録時のみ再描画
+        this.onDisplayList();
+      }
     });
   }
 
@@ -135,7 +139,9 @@ export class ProductMenuComponent implements OnInit {
    * セレクトボックス操作イベント
    */
   onDisplayList() {
-    console.log(this.selected);
+    // 表示リスト情報をクリア
+    this.dispList = [];
+    // カテゴリーで取得
     this.getProductList();
   }
 

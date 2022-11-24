@@ -63,6 +63,9 @@ export class ProductPostComponent implements OnInit {
         // カテゴリーと数量は初期値があるので設定する。
         this.postInputData.productCategory = this.selectedCategory;
         this.postInputData.productQuantity = this.selectedQuantity;
+        // 商品名、説明は初期化
+        this.postInputData.productName = '';
+        this.postInputData.productExplanation = '';
       } else {
         this.getUser().subscribe(res => {
           if (res) {
@@ -90,8 +93,6 @@ export class ProductPostComponent implements OnInit {
       catchError(() => of(true))
     );
   }
-
-
 
   /**
    * 入力状況のチェックを行う
@@ -166,7 +167,6 @@ export class ProductPostComponent implements OnInit {
   closeModal() {
     this._dialogRef.close(true);
   }
-
 
   /**
    * 商品名入力イベント
