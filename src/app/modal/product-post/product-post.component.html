@@ -20,7 +20,7 @@
     <tr>
       <td>カテゴリー</td>
       <td>
-        <select class="displayList" [(ngModel)]="selectedCategory" (change)="onInputCheck()">
+        <select class="displayList" [(ngModel)]="selectedCategory" (change)="onCategory()">
           <option *ngFor="let item of selectCategory" [value]="item.value" [disabled]="item.disabled"
             [selected]="item.value === selectedCategory">{{item.label}}</option>
         </select>
@@ -47,7 +47,7 @@
   </table>
 
 
-  <app-upload 
+  <app-upload
     (upload)="onUpload($event)"
     (uploadUrl)="onDataPost($event)"
   ></app-upload>
