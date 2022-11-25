@@ -1,12 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ApiService } from '../service/api.service';
 import { MatDialog } from '@angular/material/dialog';
-
 import { ProductDetailComponent } from '../modal/product-detail/product-detail.component';
 import { ProductPostComponent } from '../modal/product-post/product-post.component';
 import { product } from '../entity/product';
-import { S3UploadService } from '../service/s3-upload.service';
-import { LoginUserService } from '../service/login-user.service';
 import { selectCategory } from '../entity/product-category';
 
 
@@ -36,31 +33,20 @@ export class ProductMenuComponent implements OnInit {
   dispList: productList[] = [];
   /** 商品表示区分 */
   listDiv = false;
-
-  remoteFiles: any;
-
-  photoSrc: any;
-
+  /** ローディング制御フラグ */
   loading = false;
-
   /** 表示順セレクトボタン */
   selected = 'food';
-
-  begin = 0;
-
-  length = 3;
+  /** セレクトボックスの選択肢 */
+  selectCategory = selectCategory;
 
   // 認証状態フラグ
   @Input() isLogin: boolean = true;
-
-  selectCategory = selectCategory;
-
+  
   constructor(
     private apiService: ApiService,
     public detail: MatDialog,
     public post: MatDialog,
-    private s3: S3UploadService,
-    private auth: LoginUserService,
   ) { }
 
   ngOnInit(): void {
@@ -79,7 +65,7 @@ export class ProductMenuComponent implements OnInit {
         if (result.Items.length > 0) {
           this.dispList = result.Items;
           this.dispList.forEach(item => {
-            if(item.productImageUrl) {
+            if (item.productImageUrl) {
               item.productImageUrl = 'あり'
             } else {
               item.productImageUrl = 'なし'
@@ -94,7 +80,6 @@ export class ProductMenuComponent implements OnInit {
       this.loading = false;
     });
   }
-
 
   /**
    * 選択した商品の詳細表示画面に遷移する
@@ -128,7 +113,7 @@ export class ProductMenuComponent implements OnInit {
       data: postData
     });
     dialogRef.afterClosed().subscribe(result => {
-      if(result) {
+      if (result) {
         // データ登録時のみ再描画
         this.onDisplayList();
       }

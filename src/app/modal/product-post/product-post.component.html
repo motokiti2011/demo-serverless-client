@@ -12,7 +12,6 @@
     <tr>
       <td>商品名</td>
       <td>
-        <!-- <input type="text" placeholder="商品名" id="name" name="name" #name> -->
         <input id="text" name="text" type="text" [(ngModel)]="postInputData.productName" (change)="onInputCheck()"
           placeholder="商品名" />
       </td>
@@ -34,18 +33,15 @@
             [selected]="item.value === selectedQuantity">{{item.label}}</option>
         </select>
       </td>
-      <!-- <td><input type="text" placeholder="商品名" id="quantity" name="quantity" #quantity></td> -->
     </tr>
     <tr>
       <td>説明</td>
       <td>
-        <!-- <input type="text" placeholder="説明" id="explanation" name="explanation" #explanation> -->
         <input id="text" name="text" type="text" [(ngModel)]="postInputData.productExplanation" (change)="onInputCheck()"
           placeholder="説明" />
       </td>
     </tr>
   </table>
-
 
   <app-upload
     (upload)="onUpload($event)"

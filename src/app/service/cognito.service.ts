@@ -11,13 +11,12 @@ export class CognitoService {
 
   private userPool: CognitoUserPool;
   constructor() {
-    AWS.config.region = environment.region;//👈AWSサービスを配置したリージョンを指定
+    AWS.config.region = environment.region;
     this.userPool = new CognitoUserPool({
-      UserPoolId: environment.userPoolId, //👈ユーザープールIDに書きかえ
-      ClientId: environment.clientId//👈アプリクライアントIDに書きかえ
+      UserPoolId: environment.userPoolId,
+      ClientId: environment.clientId
     });
   }
-
 
   /**
    * ログイン
@@ -205,7 +204,5 @@ export class CognitoService {
       Logins: logins
     });
   }
-
-
 
 }

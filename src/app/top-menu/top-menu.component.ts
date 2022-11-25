@@ -26,7 +26,6 @@ export class TopMenuComponent implements OnInit {
   /** 子コンポーネントを読み込む */
   @ViewChild(ProductMenuComponent) child!: ProductMenuComponent;
 
-
   loginData = {
     userName: '',
     passwd: '',
@@ -62,7 +61,6 @@ export class TopMenuComponent implements OnInit {
       this.setAuthUser(authUser);
     } else {
       this.isLogin = true;
-
     }
   }
 
@@ -77,7 +75,7 @@ export class TopMenuComponent implements OnInit {
       if (data.Items[0]) {
         this.loginUser = data.Items[0].userName;
         this.unRegistered = false;
-        // Subjectにてログイン状態を保持する。
+        // Subjectにログイン状態を保持する。
         this.auth.login(data.Items[0]);
       } else {
         this.loginUser = 'ユーザー情報未設定'
@@ -85,7 +83,6 @@ export class TopMenuComponent implements OnInit {
       }
     });
   }
-
 
   /**
    * ログインボタン押下時
@@ -97,7 +94,6 @@ export class TopMenuComponent implements OnInit {
       data: this.loginData
     });
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
       if (result) {
         const authUser = this.cognito.initAuthenticated();
         if (authUser !== null) {
@@ -131,7 +127,6 @@ export class TopMenuComponent implements OnInit {
       height: '450px',
     });
     dialogRef.afterClosed().subscribe(result => {
-        console.log(result);
         this.child.getProductList;
         this.authenticated();
     });

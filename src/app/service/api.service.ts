@@ -3,7 +3,6 @@ import { HttpClient, HttpErrorResponse, HttpResponse, } from '@angular/common/ht
 import { Observable, of, tap } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { productList } from '../product-menu/product-menu.component';
 import { product } from '../entity/product';
 import { user } from '../entity/user';
 
@@ -19,7 +18,8 @@ export class ApiService {
   private apiEndPoint: string = environment.apiEmdPoint;
 
   /**
-   * 商品リストを取得する
+   * 商品リストをGSIで取得する
+   * @param 商品カテゴリー
    * @return productList[]
    */
   getProductList(category: string): Observable<any> {
@@ -39,7 +39,7 @@ export class ApiService {
   }
 
   /**
-   * 商品リストを取得する
+   * 商品リストをPKで取得する
    * @param 商品ID
    * @return product
    */
@@ -58,7 +58,6 @@ export class ApiService {
       catchError((err: HttpErrorResponse) => of(undefined))
     );
   }
-
 
   /**
    * 商品情報を登録
@@ -153,25 +152,5 @@ export class ApiService {
         catchError((err: HttpErrorResponse) => of(undefined))
       );
     }
-
-
-  /**
-   * 失敗したHttp操作を処理します。
-   * アプリを持続させます。
-   *
-   * @param operation - 失敗した操作の名前
-   * @param result - observableな結果として返す任意の値
-   */
-  private handleError<T>(operation = 'operation', result?: T) {
-    return (error: any): Observable<T> => {
-      // TODO: リモート上のロギング基盤にエラーを送信する
-      console.error(error); // かわりにconsoleに出力
-      // TODO: ユーザーへの開示のためにエラーの変換処理を改善する
-      console.log(`${operation} failed: ${error.message}`);
-      // 空の結果を返して、アプリを持続可能にする
-      return of(result as T);
-    };
-  }
-
 
 }

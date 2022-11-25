@@ -10,7 +10,6 @@ import { CognitoService } from './cognito.service';
 })
 export class S3UploadService {
 
-
   private s3: AWS.S3;
 
   constructor(
@@ -62,7 +61,6 @@ export class S3UploadService {
      */
   public onManagedUpload(file: File): Promise<AWS.S3.ManagedUpload.SendData> {
     let params: AWS.S3.Types.PutObjectRequest = {
-      // ACL: 'public-read',
       Bucket: environment.bucketName,
       Key: file.name,
       Body: file,

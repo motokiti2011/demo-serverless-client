@@ -17,7 +17,6 @@ import { ProductPostComponent } from './modal/product-post/product-post.componen
 import { ProductDetailComponent } from './modal/product-detail/product-detail.component';
 import { UserInfoComponent } from './modal/user-info/user-info.component';
 import { ProductMenuComponent } from './product-menu/product-menu.component';
-import { MessageDialogComponent } from './modal/message-dialog/message-dialog.component';
 import { UploadComponent } from './modal/product-post/upload/upload.component';
 import { S3UploadService } from './service/s3-upload.service';
 import { POST_PROVIDER } from './service/interceptors/http-interceptors';
@@ -39,7 +38,6 @@ const ROUTE_TABLE: Routes = [
     ProductDetailComponent,
     UserInfoComponent,
     ProductMenuComponent,
-    MessageDialogComponent,
     UploadComponent
   ],
   imports: [

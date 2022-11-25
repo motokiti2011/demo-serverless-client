@@ -23,9 +23,7 @@ export class LoginComponent implements OnInit {
     userName: '',
     passwd: '',
   }
-
-  hoge = '';
-
+  
   lading = false;
 
   overlayRef = this.overlay.create({
@@ -83,22 +81,15 @@ export class LoginComponent implements OnInit {
   async login(username: string, password: string): Promise<any> {
     try {
       const isLogin = await this.cognito.isAuthenticated();
-      console.log(isLogin);
       if (isLogin === null) {
-        const result = await this.cognito.login(username, password);
-        this.hoge = JSON.stringify(result);
+        await this.cognito.login(username, password);
         this.closeModal();
-        this.hoge = 'ログインしました。';
       } else {
         this.cognito.logout();
-        // this.buttonTitle = 'ログイン';
-        this.hoge = 'ログアウトしました。';
       }
     } catch (e) {
       if (e === null) {
         this.cognito.logout();
-        // this.buttonTitle = 'ログイン';
-        this.hoge = 'セッションの有効期限切れです。';
       }
     }
   }

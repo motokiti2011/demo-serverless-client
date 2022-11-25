@@ -44,7 +44,6 @@ export class SingupComponent implements OnInit {
         this.userInfo.userId = userId;
         this.userInfo.userName = '';
         this.userInfo.mailAdress = email;
-
         console.log(result);
       }).catch((err) => {
         this.dispMsg = errorMsg[0].value;
